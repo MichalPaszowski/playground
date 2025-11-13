@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simple LiveChat Test Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <h1>Simple website with LiveChat + Sales Tracker</h1>
+  <p>This is a minimal page to test the LiveChat widget and sales tracker integration.</p>
+
+  <!-- Start of LiveChat (www.livechat.com) code -->
+  <script>
+      window.__lc = window.__lc || {};
+      window.__lc.license = 100317739;
+      window.__lc.integration_name = "manual_channels";
+      window.__lc.product_name = "livechat";
+      ;(function(n,t,c){function i(n){return e._h?e._h.apply(null,n):e._q.push(n)}var e={_q:[],_h:null,_v:"2.0",on:function(){i(["on",c.call(arguments)])},once:function(){i(["once",c.call(arguments)])},off:function(){i(["off",c.call(arguments)])},get:function(){if(!e._h)throw new Error("[LiveChatWidget] You can't use getters before load.");return i(["get",c.call(arguments)])},call:function(){i(["call",c.call(arguments)])},init:function(){var n=t.createElement("script");n.async=!0,n.type="text/javascript",n.src="https://cdn.labs.livechatinc.com/tracking.js",t.head.appendChild(n)}};!n.__lc.asyncInit&&e.init(),n.LiveChatWidget=n.LiveChatWidget||e}(window,document,[].slice))
+  </script>
+  <noscript>
+    <a href="https://www.livechat.com/chat-with/100317739/" rel="nofollow">Chat with us</a>,
+    powered by
+    <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a>
+  </noscript>
+  <!-- End of LiveChat code -->
+
+  <!-- Start of the Sales tracker code (place after LiveChat tracking code) -->
+  <script type="text/javascript">
+    var LC_API = LC_API || {on_after_load: function(){}};
+    (function(cb){
+      LC_API.on_after_load = function(){
+        cb();
+        try {
+          var custom_variables = [
+            {name: '__order_price', value: 10}
+          ];
+          LC_API.trigger_sales_tracker('3847e50d-e2b5-4851-b3fc-fe21dcf9805c', custom_variables);
+        } catch (error) {
+          if (window.console){ console.log('LiveChat sales tracker error:', error); }
+        }
+      };
+    })(LC_API.on_after_load);
+  </script>
+  <!-- End of the Sales tracker code -->
+</body>
+</html>
