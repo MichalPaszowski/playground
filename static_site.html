@@ -27,19 +27,21 @@
   <!-- Start of the Sales tracker code (place after LiveChat tracking code) -->
   <script type="text/javascript">
     var LC_API = LC_API || {on_after_load: function(){}};
-    (function(cb){
-      LC_API.on_after_load = function(){
-        cb();
-        try {
-          var custom_variables = [
-            {name: '__order_price', value: 10}
-          ];
-          LC_API.trigger_sales_tracker('3847e50d-e2b5-4851-b3fc-fe21dcf9805c', custom_variables);
-        } catch (error) {
-          if (window.console){ console.log('LiveChat sales tracker error:', error); }
-        }
-      };
-    })(LC_API.on_after_load);
+    
+    // Expose a global function to manually trigger the sales tracker
+    window.triggerSalesTracker = function() {
+      try {
+        var custom_variables = [
+          {name: '__order_price', value: 10}
+        ];
+        LC_API.trigger_sales_tracker('3847e50d-e2b5-4851-b3fc-fe21dcf9805c', custom_variables);
+        console.log('Sales tracker triggered successfully');
+      } catch (error) {
+        if (window.console){ console.log('LiveChat sales tracker error:', error); }
+      }
+    };
+    
+    console.log('Sales tracker ready. Call triggerSalesTracker() to fire the event.');
   </script>
   <!-- End of the Sales tracker code -->
 </body>
